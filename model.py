@@ -33,7 +33,6 @@ def initialize_parameters(n_features):
 import numpy as np
 
 def compute_scores(x, params):
-    """Return raw linear scores x @ w + b, shape (n_samples,)."""
     # TODO: score each example as a linear function of the current weights and bias.
     x = np.array(x)
     w = np.array(params["w"])
