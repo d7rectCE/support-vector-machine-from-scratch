@@ -70,8 +70,7 @@ def compute_gradients(x, y, params, reg_lambda):
     """Return {'dw': ndarray shape (n_features,), 'db': float} = gradient of svm_objective."""
     n_samples = x.shape[0]
     w = params["w"]
-    b = params["b"]
-    margins = y * (x @ w + b)
+    margins = y * compute_scores(x, params)
     violation_mask = (margins < 1)
     
     dw = -(1/n_samples) * (x.T @ (y * violation_mask)) + 2 * reg_lambda * w
