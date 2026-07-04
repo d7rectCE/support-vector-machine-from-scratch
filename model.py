@@ -7,8 +7,6 @@ Assembled from your step-by-step solutions.
 import numpy as np
 
 # Step 1 - standardize_features
-import numpy as np
-
 def standardize_features(x):
     # TODO: rescale each column of x to have mean 0 and std 1 (leave zero-std columns alone).
     x = np.array(x)
@@ -21,17 +19,13 @@ def standardize_features(x):
     return standardize
 
 # Step 2 - initialize_parameters
-import numpy as np
 def initialize_parameters(n_features):
-    """Return a dict with 'w' of shape (n_features,) and scalar 'b'."""
     # TODO: create starting weights and bias for a linear SVM
     w = np.zeros(n_features)
     b = 0
     return {"w": w, "b": b}
 
 # Step 3 - compute_scores
-import numpy as np
-
 def compute_scores(x, params):
     # TODO: score each example as a linear function of the current weights and bias.
     x = np.array(x)
@@ -41,8 +35,6 @@ def compute_scores(x, params):
     return scores
 
 # Step 4 - predict_from_scores
-import numpy as np
-
 def predict_from_scores(scores):
     # TODO: convert a 1-D array of raw scores into +1 / -1 class predictions.
     class_pred = np.where(scores >= 0, 1, -1)
@@ -64,8 +56,6 @@ def svm_objective(x, y, params, reg_lambda):
     return obj
 
 # Step 7 - compute_gradients
-import numpy as np
-
 def compute_gradients(x, y, params, reg_lambda):
     """Return {'dw': ndarray shape (n_features,), 'db': float} = gradient of svm_objective."""
     n_samples = x.shape[0]
