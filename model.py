@@ -59,8 +59,8 @@ def svm_objective(x, y, params, reg_lambda):
     # TODO: return mean hinge loss over the dataset plus reg_lambda * (w dot w)
     scores = compute_scores(x, params)
     loss = hinge_loss_example(scores, y)
-    w = params["W"]
-    obj = loss + reg_lambda * (w @ w)
+    w = params["w"]
+    obj = 1/len(x) * np.sum(loss + reg_lambda * (w @ w))
     return obj
 
 # Step 7 - compute_gradients (not yet solved)
