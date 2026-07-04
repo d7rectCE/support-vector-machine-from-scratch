@@ -77,8 +77,11 @@ def compute_gradients(x, y, params, reg_lambda):
     db = -(1/n_samples) * np.sum(y * violation_mask)
     return {"dw": dw, "db": db}
 
-# Step 8 - apply_update (not yet solved)
-# TODO: implement
+# Step 8 - apply_update
+def apply_update(params, grads, learning_rate):
+    w_updated = params["w"] - learning_rate * grads["dw"]
+    b_updated = params["b"] - learning_rate * grads["db"]
+    return {"w": w_updated, "b": b_updated}
 
 # Step 9 - train_svm (not yet solved)
 # TODO: implement
