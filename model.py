@@ -99,6 +99,9 @@ def predict_labels(x, params):
     y_pred = predict_from_scores(scores)
     return y_pred
 
-# Step 11 - accuracy_score (not yet solved)
-# TODO: implement
+# Step 11 - accuracy_score
+def accuracy_score(y_pred, y_true):
+    # TODO: return the fraction of positions where y_pred equals y_true.
+    accuracy = 1/y_true.shape[0] * np.sum(y_pred == y_true)
+    return accuracy
 
