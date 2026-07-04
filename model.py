@@ -48,8 +48,11 @@ def predict_from_scores(scores):
     class_pred = np.where(scores >= 0, 1, -1)
     return class_pred
 
-# Step 5 - hinge_loss_example (not yet solved)
-# TODO: implement
+# Step 5 - hinge_loss_example
+def hinge_loss_example(score, y):
+    # TODO: return the hinge loss for a single example with raw score `score` and label y in {-1, +1}.
+    loss = max(0, 1 - y * score)
+    return loss
 
 # Step 6 - svm_objective (not yet solved)
 # TODO: implement
