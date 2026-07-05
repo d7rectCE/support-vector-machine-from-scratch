@@ -1,27 +1,38 @@
-# Support Vector Machine from Scratch
+# Linear SVM from scratch
 
-Build a linear Support Vector Machine end-to-end using only basic array operations, implementing the hinge loss, regularized objective, and gradient-based training loop. By the end you'll have a working binary classifier you can train, predict with, and evaluate on real data.
-
-## How to run
+Линейный SVM на numpy: hinge loss, L2-регуляризация, субградиентный спуск. Без sklearn.
 
 ```bash
 python scaffold.py
 ```
 
-## Steps
+scaffold.py генерит два гауссовых облака, обучает 200 эпох и печатает objective и accuracy.
 
-- [x] **1.** standardize_features
-- [x] **2.** initialize_parameters
-- [x] **3.** compute_scores
-- [x] **4.** predict_from_scores
-- [x] **5.** hinge_loss_example
-- [x] **6.** svm_objective
-- [x] **7.** compute_gradients
-- [x] **8.** apply_update
-- [x] **9.** train_svm
-- [x] **10.** predict_labels
-- [x] **11.** accuracy_score
+## Как это работает
+
+Минимизируется
+
+```
+L(w, b) = (1/n) Σ max(0, 1 − yᵢ(w·xᵢ + b)) + λ‖w‖²
+```
+
+Hinge loss не дифференцируем в изломе, но субградиент считается просто: в градиент входят только объекты с margin < 1. По всему батчу это одна маска и одно матричное произведение:
+
+```python
+margins = y * (x @ w + b)
+mask = margins < 1
+dw = -(1/n) * (x.T @ (y * mask)) + 2 * reg_lambda * w
+```
+
+Признаки перед обучением стандартизуются — learning rate один на все веса, на разных масштабах признаков спуск расползается.
+
+## Заметки
+
+Пара мест, которые работали, но неправильно. Число признаков определялось как `np.shape(x[1])` — это shape строки, а не количество колонок, совпадало случайно. В objective регуляризация из-за broadcasting попадала под сумму по объектам — значение выходило верным только потому, что снаружи всё делилось на n. Переписал как `np.mean(loss) + reg_lambda * (w @ w)`, чтобы код совпадал с формулой, а не сокращался в неё случайно.
+
+Только линейное ядро и бинарная классификация. Ядра и multiclass не делал.
 
 ---
 
-Built on Deep-ML.
+Разбивка на шаги — с deep-ml.com, решения мои.
+
