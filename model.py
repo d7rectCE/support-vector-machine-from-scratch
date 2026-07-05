@@ -46,7 +46,7 @@ def svm_objective(x, y, params, reg_lambda):
     scores = compute_scores(x, params)
     loss = hinge_loss_example(scores, y)
     w = params["w"]
-    obj = 1/len(x) * np.sum(loss + reg_lambda * (w @ w))
+    obj = 1/len(x) * np.sum(np.mean(loss) + reg_lambda * (w @ w))
     return obj
 
 
